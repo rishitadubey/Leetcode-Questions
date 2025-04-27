@@ -11,20 +11,25 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* temp= head;
-         if (head == nullptr) return nullptr;
+        ListNode* temp= head; //  head pe temp intitialize
 
-        while(temp!=NULL && temp->next!=NULL) {
+         if (head == nullptr) return nullptr; //if LL IS EMPTY
+
+        while(temp!=NULL && temp->next!=NULL) { // JABTAK TEMP AUR TEMP KA NEXT POINTER NULL NAHI HO JAATA
+
         if(temp->val == temp->next->val){
             
-            
-            ListNode* nodeTodelete= temp->next;
+       //AGAR TEMP KI VALUE AUR TEMP K BNEXT KI VALUE EQUAL HO TOH ie nodes are equal
 
-            temp->next = temp->next->next;
-            delete  nodeTodelete;
+         ListNode* nodeTodelete= temp->next; // ek naya nodeTodelete banado taki confusion na ho node delete karne mein
+               
+            temp->next = temp->next->next; //temp k next pointer me temp ke next ke nxt ko rakhdo
+            
+          
+            delete  nodeTodelete; // delete the duplicate node
         }
-        else {
-                temp=temp->next;
+        else {                    // if ajancent nodes are not equal
+                temp=temp->next;  //temp me temp next ka pointer rakhdo i.e.temp ek aage badhado
         }
  }
   return head;
