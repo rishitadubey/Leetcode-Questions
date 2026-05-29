@@ -9,14 +9,14 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+ class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        if( p==NULL ||  q== NULL){
-            return (p==q);
-        }
-        return (p->val == q -> val)
-        && isSameTree(p->left , q->left)
-        && isSameTree(p->right, q-> right);
+        if(!p || !q) return p==q; // agar p q dono null h || agar ek null ek valid hai 
+         if (p->val == q-> val) // agar p, q nodes ki value same h toh
+         return isSameTree( p->left, q-> left) && isSameTree( p->right , q->right); // 
+         return false;
     }
 };
+        
+    
