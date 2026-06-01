@@ -1,6 +1,5 @@
 class Solution {
 public:
-    // A unique marker that won't conflict with real input numbers
     int MARKER = INT_MIN + 7; 
 
     void markRow(vector<vector<int>>& matrix, int i, int m) {
@@ -32,7 +31,6 @@ public:
             }
         }
 
-        // Final Pass: Turn only our specific MARKERs back to 0
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (matrix[i][j] == MARKER) {
