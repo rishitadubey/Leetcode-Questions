@@ -1,22 +1,44 @@
 class Solution {
 public:
-    void setZeroes(vector<vector<int>>& m) {
-        vector<vector<int>>a;
-        for(int i=0;i<m.size();i++){
-            for(int j=0;j<m[i].size();j++){
-                if(m[i][j]==0){
-                    a.push_back({i,j});
+    // A unique marker that won't conflict with real input numbers
+    int MARKER = INT_MIN + 7; 
+
+    void markRow(vector<vector<int>>& matrix, int i, int m) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] != 0 && matrix[i][j] != MARKER) {
+                matrix[i][j] = MARKER;
+            }
+        }
+    }
+
+    void markCol(vector<vector<int>>& matrix, int j, int n) {
+        for (int i = 0; i < n; i++) {
+            if (matrix[i][j] != 0 && matrix[i][j] != MARKER) {
+                matrix[i][j] = MARKER;
+            }
+        }
+    }
+
+    void setZeroes(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    markRow(matrix, i, m);
+                    markCol(matrix, j, n);
                 }
             }
         }
-        for(auto k:a){
-            for(int t=0;t<m[k[0]].size();t++){
-                m[k[0]][t]=0;
-            }
-            for(int o=0;o<m.size();o++){
-                m[o][k[1]]=0;
+
+        // Final Pass: Turn only our specific MARKERs back to 0
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == MARKER) {
+                    matrix[i][j] = 0;
+                }
             }
         }
-
     }
 };
